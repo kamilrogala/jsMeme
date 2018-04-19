@@ -1,0 +1,27 @@
+{
+  "name": "js-meme",
+  "version": "1.0.0",
+  "description": "Experimenting with meme generator based on canvas elements and JS",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel": "babel src -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamilrogala/jsMeme.git"
+  },
+  "author": "Kamil Rogala <contact@kamilrogala.it> (https://kamilrogala.it)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamilrogala/jsMeme/issues"
+  },
+  "homepage": "https://github.com/kamilrogala/jsMeme#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}

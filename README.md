@@ -1,6 +1,6 @@
-# project: js Google It!
+# project: jsMeme
 
-Small tool for checking URL's from array in Google in single click
+Experimenting with meme generator based on canvas elements and JS
 
 # ToDo
 
