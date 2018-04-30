@@ -1,5 +1,5 @@
 /*jshint esversion:6,browser:true,devel: true*/
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 	const canvas = document.getElementById('meme');
 	const canvasBtnDownload = document.getElementById('btn-download');
 	const canvasBtnGenerate = document.getElementById('btn-generate');
@@ -11,19 +11,29 @@ document.addEventListener('DOMContentLoaded', function () {
 	canvasBtnDownload.style.opacity = 0;
 	canvasBtnDownload.style.transition = '.7s all ease-in-out';
 
-	const jsMemeBg = function (color) {
+	const jsMemeBg = (color) => {
 		ctx.fillStyle = color;
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 	};
-
-	const jsMemeGenerate = function () {
-		const imageObj = new Image();
+	const addImageProcess = (src) => {
+		return new Promise((resolve, reject) => {
+			let img = new Image()
+			img.onload = () => {
+				resolve(img);
+			}
+			img.onerror = reject
+			img.src = src
+		})
+	}
+	const jsMemeGenerate = (imageObj) => {
 		let X, Y, sourceWidth, sourceHeight, destWidth, destHeight;
-		imageObj.crossOrigin = "Anonymous";
-		imageObj.src = canvasPic.value;
+		
 		X = Y = 10;
+		
 		sourceWidth = imageObj.width;
 		sourceHeight = imageObj.height;
+		imageObj.crossOrigin = "Anonymous";
+		
 		destWidth = sourceWidth - 10;
 		destHeight = sourceHeight - 100;
 		ctx.drawImage(imageObj, X, Y, sourceWidth, sourceHeight, X, Y, destWidth, destHeight);
@@ -37,19 +47,19 @@ document.addEventListener('DOMContentLoaded', function () {
 		canvasBtnDownload.style.opacity = 1;
 	};
 
+	const memeRender = () => {
+		jsMemeBg(canvasBg.value);
+		addImageProcess(canvasPic.value).then(img => {
+			jsMemeGenerate(img);
+		});
+	}
+	
 	jsMemeBg('#000');
 
-	canvasBg.addEventListener('change', function () {
-		jsMemeBg(canvasBg.value);
-		jsMemeGenerate();
-	});
-	canvasPic.addEventListener('change', function () {
-		jsMemeBg(canvasBg.value);
-		jsMemeGenerate();
-	});
-	canvasBtnGenerate.addEventListener('click', function () {
-		jsMemeGenerate();
-	});
+	canvasBg.addEventListener('change', memeRender);
+	canvasPic.addEventListener('change', memeRender);
+	canvasBtnGenerate.addEventListener('click', memeRender);
+	
 	canvasBtnDownload.addEventListener('click', function () {
 		canvasBtnDownload.href = canvas.toDataURL();
 	});

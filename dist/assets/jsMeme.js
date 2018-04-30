@@ -17,20 +17,30 @@ document.addEventListener('DOMContentLoaded', function () {
 		ctx.fillStyle = color;
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 	};
-
-	var jsMemeGenerate = function jsMemeGenerate() {
-		var imageObj = new Image();
+	var addImageProcess = function addImageProcess(src) {
+		return new Promise(function (resolve, reject) {
+			var img = new Image();
+			img.onload = function () {
+				resolve(img);
+			};
+			img.onerror = reject;
+			img.src = src;
+		});
+	};
+	var jsMemeGenerate = function jsMemeGenerate(imageObj) {
 		var X = void 0,
 		    Y = void 0,
 		    sourceWidth = void 0,
 		    sourceHeight = void 0,
 		    destWidth = void 0,
 		    destHeight = void 0;
-		imageObj.crossOrigin = "Anonymous";
-		imageObj.src = canvasPic.value;
+
 		X = Y = 10;
+
 		sourceWidth = imageObj.width;
 		sourceHeight = imageObj.height;
+		imageObj.crossOrigin = "Anonymous";
+
 		destWidth = sourceWidth - 10;
 		destHeight = sourceHeight - 100;
 		ctx.drawImage(imageObj, X, Y, sourceWidth, sourceHeight, X, Y, destWidth, destHeight);
@@ -44,19 +54,19 @@ document.addEventListener('DOMContentLoaded', function () {
 		canvasBtnDownload.style.opacity = 1;
 	};
 
+	var memeRender = function memeRender() {
+		jsMemeBg(canvasBg.value);
+		addImageProcess(canvasPic.value).then(function (img) {
+			jsMemeGenerate(img);
+		});
+	};
+
 	jsMemeBg('#000');
 
-	canvasBg.addEventListener('change', function () {
-		jsMemeBg(canvasBg.value);
-		jsMemeGenerate();
-	});
-	canvasPic.addEventListener('change', function () {
-		jsMemeBg(canvasBg.value);
-		jsMemeGenerate();
-	});
-	canvasBtnGenerate.addEventListener('click', function () {
-		jsMemeGenerate();
-	});
+	canvasBg.addEventListener('change', memeRender);
+	canvasPic.addEventListener('change', memeRender);
+	canvasBtnGenerate.addEventListener('click', memeRender);
+
 	canvasBtnDownload.addEventListener('click', function () {
 		canvasBtnDownload.href = canvas.toDataURL();
 	});
