@@ -28,22 +28,22 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	};
 	var jsMemeGenerate = function jsMemeGenerate(imageObj) {
-		var X = void 0,
-		    Y = void 0,
+		var memeBorderX = void 0,
+		    memeBorderY = void 0,
 		    sourceWidth = void 0,
 		    sourceHeight = void 0,
 		    destWidth = void 0,
 		    destHeight = void 0;
 
-		X = Y = 10;
+		memeBorderX = memeBorderY = 10;
 
 		sourceWidth = imageObj.width;
 		sourceHeight = imageObj.height;
 		imageObj.crossOrigin = "Anonymous";
 
-		destWidth = sourceWidth - 10;
-		destHeight = sourceHeight - 100;
-		ctx.drawImage(imageObj, X, Y, sourceWidth, sourceHeight, X, Y, destWidth, destHeight);
+		destWidth = sourceWidth - memeBorderX;
+		destHeight = sourceHeight - memeBorderY;
+		ctx.drawImage(imageObj, memeBorderX, memeBorderY, sourceWidth, sourceHeight, memeBorderX, memeBorderY, destWidth, destHeight);
 
 		ctx.font = "35px Arial";
 		ctx.fillStyle = '#fff';

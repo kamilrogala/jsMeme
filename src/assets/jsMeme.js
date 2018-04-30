@@ -26,17 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 	}
 	const jsMemeGenerate = (imageObj) => {
-		let X, Y, sourceWidth, sourceHeight, destWidth, destHeight;
+		let memeBorderX, memeBorderY, sourceWidth, sourceHeight, destWidth, destHeight;
 		
-		X = Y = 10;
+		memeBorderX = memeBorderY = 10;
 		
 		sourceWidth = imageObj.width;
 		sourceHeight = imageObj.height;
 		imageObj.crossOrigin = "Anonymous";
 		
-		destWidth = sourceWidth - 10;
-		destHeight = sourceHeight - 100;
-		ctx.drawImage(imageObj, X, Y, sourceWidth, sourceHeight, X, Y, destWidth, destHeight);
+		destWidth = sourceWidth - memeBorderX;
+		destHeight = sourceHeight - memeBorderY;
+		ctx.drawImage(imageObj, memeBorderX, memeBorderY, sourceWidth, sourceHeight, memeBorderX, memeBorderY, destWidth, destHeight);
 
 		ctx.font = "35px Arial";
 		ctx.fillStyle = '#fff';

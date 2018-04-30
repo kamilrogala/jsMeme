@@ -27,17 +27,20 @@ button {
 	transition: .4s all ease-in-out
 }
 
+a {
+	text-decoration: none
+}
+
 .wrapper {
-	width: 1200px;
-	margin: 0 auto;
+	width: 900px;
+	margin: 0 auto 25px;
 }
 
 .inputs {
 	text-align: center;
 }
 
-.group,
-canvas {
+.group {
 	margin: 15px 0 0;
 }
 
@@ -54,6 +57,8 @@ input {
 
 canvas {
 	border: 2px solid #000;
+	margin: 15px auto 25px;
+	display: block;
 }
 
 input {
